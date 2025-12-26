@@ -2,7 +2,9 @@ package com.mailbreeze.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.mailbreeze.models.enums.ConsentType;
 
+import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,6 +30,18 @@ public class CreateContactParams {
 
     private String source;
 
+    @JsonProperty("consent_type")
+    private ConsentType consentType;
+
+    @JsonProperty("consent_source")
+    private String consentSource;
+
+    @JsonProperty("consent_timestamp")
+    private Instant consentTimestamp;
+
+    @JsonProperty("consent_ip_address")
+    private String consentIpAddress;
+
     private CreateContactParams(Builder builder) {
         this.email = builder.email;
         this.firstName = builder.firstName;
@@ -35,6 +49,10 @@ public class CreateContactParams {
         this.phoneNumber = builder.phoneNumber;
         this.customFields = builder.customFields;
         this.source = builder.source;
+        this.consentType = builder.consentType;
+        this.consentSource = builder.consentSource;
+        this.consentTimestamp = builder.consentTimestamp;
+        this.consentIpAddress = builder.consentIpAddress;
     }
 
     public static Builder builder() {
@@ -65,6 +83,22 @@ public class CreateContactParams {
         return source;
     }
 
+    public ConsentType getConsentType() {
+        return consentType;
+    }
+
+    public String getConsentSource() {
+        return consentSource;
+    }
+
+    public Instant getConsentTimestamp() {
+        return consentTimestamp;
+    }
+
+    public String getConsentIpAddress() {
+        return consentIpAddress;
+    }
+
     public static final class Builder {
         private String email;
         private String firstName;
@@ -72,6 +106,10 @@ public class CreateContactParams {
         private String phoneNumber;
         private Map<String, Object> customFields;
         private String source;
+        private ConsentType consentType;
+        private String consentSource;
+        private Instant consentTimestamp;
+        private String consentIpAddress;
 
         private Builder() {}
 
@@ -110,6 +148,26 @@ public class CreateContactParams {
 
         public Builder source(String source) {
             this.source = source;
+            return this;
+        }
+
+        public Builder consentType(ConsentType consentType) {
+            this.consentType = consentType;
+            return this;
+        }
+
+        public Builder consentSource(String consentSource) {
+            this.consentSource = consentSource;
+            return this;
+        }
+
+        public Builder consentTimestamp(Instant consentTimestamp) {
+            this.consentTimestamp = consentTimestamp;
+            return this;
+        }
+
+        public Builder consentIpAddress(String consentIpAddress) {
+            this.consentIpAddress = consentIpAddress;
             return this;
         }
 

@@ -2,6 +2,7 @@ package com.mailbreeze.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.mailbreeze.models.enums.ConsentType;
 import com.mailbreeze.models.enums.ContactStatus;
 
 import java.time.Instant;
@@ -45,6 +46,18 @@ public class Contact {
 
     @JsonProperty("unsubscribed_at")
     private Instant unsubscribedAt;
+
+    @JsonProperty("consent_type")
+    private ConsentType consentType;
+
+    @JsonProperty("consent_source")
+    private String consentSource;
+
+    @JsonProperty("consent_timestamp")
+    private Instant consentTimestamp;
+
+    @JsonProperty("consent_ip_address")
+    private String consentIpAddress;
 
     public String getId() {
         return id;
@@ -148,5 +161,37 @@ public class Contact {
 
     public void setUnsubscribedAt(Instant unsubscribedAt) {
         this.unsubscribedAt = unsubscribedAt;
+    }
+
+    public ConsentType getConsentType() {
+        return consentType;
+    }
+
+    public void setConsentType(ConsentType consentType) {
+        this.consentType = consentType;
+    }
+
+    public String getConsentSource() {
+        return consentSource;
+    }
+
+    public void setConsentSource(String consentSource) {
+        this.consentSource = consentSource;
+    }
+
+    public Instant getConsentTimestamp() {
+        return consentTimestamp;
+    }
+
+    public void setConsentTimestamp(Instant consentTimestamp) {
+        this.consentTimestamp = consentTimestamp;
+    }
+
+    public String getConsentIpAddress() {
+        return consentIpAddress;
+    }
+
+    public void setConsentIpAddress(String consentIpAddress) {
+        this.consentIpAddress = consentIpAddress;
     }
 }

@@ -161,13 +161,14 @@ class VerificationTest {
                         {
                             "success": true,
                             "data": {
-                                "total_verified": 5000,
-                                "valid": 4500,
-                                "invalid": 300,
-                                "risky": 150,
-                                "unknown": 50,
-                                "credits_used": 5000,
-                                "credits_remaining": 95000
+                                "stats": {
+                                    "totalVerified": 5000,
+                                    "totalValid": 4500,
+                                    "totalInvalid": 300,
+                                    "totalUnknown": 50,
+                                    "totalVerifications": 5000,
+                                    "validPercentage": 90.0
+                                }
                             }
                         }
                         """)
@@ -177,8 +178,10 @@ class VerificationTest {
 
             assertThat(stats).isNotNull();
             assertThat(stats.getTotalVerified()).isEqualTo(5000);
-            assertThat(stats.getValid()).isEqualTo(4500);
-            assertThat(stats.getCreditsRemaining()).isEqualTo(95000);
+            assertThat(stats.getTotalValid()).isEqualTo(4500);
+            assertThat(stats.getTotalInvalid()).isEqualTo(300);
+            assertThat(stats.getTotalUnknown()).isEqualTo(50);
+            assertThat(stats.getValidPercentage()).isEqualTo(90.0);
 
             RecordedRequest request = mockServer.takeRequest();
             assertThat(request.getPath()).isEqualTo("/email-verification/stats");

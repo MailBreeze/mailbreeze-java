@@ -276,13 +276,14 @@ class EmailsTest {
                         {
                             "success": true,
                             "data": {
-                                "sent": 1000,
-                                "delivered": 950,
-                                "bounced": 30,
-                                "complained": 5,
-                                "opened": 500,
-                                "clicked": 200,
-                                "unsubscribed": 15
+                                "stats": {
+                                    "total": 1000,
+                                    "sent": 950,
+                                    "failed": 50,
+                                    "transactional": 600,
+                                    "marketing": 400,
+                                    "successRate": 95.0
+                                }
                             }
                         }
                         """)
@@ -291,13 +292,12 @@ class EmailsTest {
             EmailStats stats = emails.stats();
 
             assertThat(stats).isNotNull();
-            assertThat(stats.getSent()).isEqualTo(1000);
-            assertThat(stats.getDelivered()).isEqualTo(950);
-            assertThat(stats.getBounced()).isEqualTo(30);
-            assertThat(stats.getComplained()).isEqualTo(5);
-            assertThat(stats.getOpened()).isEqualTo(500);
-            assertThat(stats.getClicked()).isEqualTo(200);
-            assertThat(stats.getUnsubscribed()).isEqualTo(15);
+            assertThat(stats.getTotal()).isEqualTo(1000);
+            assertThat(stats.getSent()).isEqualTo(950);
+            assertThat(stats.getFailed()).isEqualTo(50);
+            assertThat(stats.getTransactional()).isEqualTo(600);
+            assertThat(stats.getMarketing()).isEqualTo(400);
+            assertThat(stats.getSuccessRate()).isEqualTo(95.0);
 
             RecordedRequest request = mockServer.takeRequest();
             assertThat(request.getMethod()).isEqualTo("GET");

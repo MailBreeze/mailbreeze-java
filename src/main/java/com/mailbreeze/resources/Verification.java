@@ -79,6 +79,7 @@ public class Verification extends BaseResource {
      * @return the verification statistics
      */
     public VerificationStats stats() {
-        return get("/stats", null, VerificationStats.class);
+        VerificationStatsResponse response = get("/stats", null, VerificationStatsResponse.class);
+        return response != null ? response.getStats() : null;
     }
 }

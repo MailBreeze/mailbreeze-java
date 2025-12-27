@@ -38,7 +38,6 @@ public final class MailBreeze {
     private final Lists lists;
     private final Attachments attachments;
     private final Verification verification;
-    private final Automations automations;
 
     private MailBreeze(Builder builder) {
         String baseUrl = builder.baseUrl != null ? builder.baseUrl : DEFAULT_BASE_URL;
@@ -50,7 +49,6 @@ public final class MailBreeze {
         this.lists = new Lists(httpClient);
         this.attachments = new Attachments(httpClient);
         this.verification = new Verification(httpClient);
-        this.automations = new Automations(httpClient);
     }
 
     /**
@@ -108,15 +106,6 @@ public final class MailBreeze {
      */
     public Verification verification() {
         return verification;
-    }
-
-    /**
-     * Returns the Automations resource for managing automation enrollments.
-     *
-     * @return the Automations resource
-     */
-    public Automations automations() {
-        return automations;
     }
 
     /**

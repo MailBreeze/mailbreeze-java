@@ -8,13 +8,20 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class EmailStats {
 
+    private int total;
     private int sent;
-    private int delivered;
-    private int bounced;
-    private int complained;
-    private int opened;
-    private int clicked;
-    private int unsubscribed;
+    private int failed;
+    private int transactional;
+    private int marketing;
+    private double successRate;
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
 
     public int getSent() {
         return sent;
@@ -24,51 +31,35 @@ public class EmailStats {
         this.sent = sent;
     }
 
-    public int getDelivered() {
-        return delivered;
+    public int getFailed() {
+        return failed;
     }
 
-    public void setDelivered(int delivered) {
-        this.delivered = delivered;
+    public void setFailed(int failed) {
+        this.failed = failed;
     }
 
-    public int getBounced() {
-        return bounced;
+    public int getTransactional() {
+        return transactional;
     }
 
-    public void setBounced(int bounced) {
-        this.bounced = bounced;
+    public void setTransactional(int transactional) {
+        this.transactional = transactional;
     }
 
-    public int getComplained() {
-        return complained;
+    public int getMarketing() {
+        return marketing;
     }
 
-    public void setComplained(int complained) {
-        this.complained = complained;
+    public void setMarketing(int marketing) {
+        this.marketing = marketing;
     }
 
-    public int getOpened() {
-        return opened;
+    public double getSuccessRate() {
+        return successRate;
     }
 
-    public void setOpened(int opened) {
-        this.opened = opened;
-    }
-
-    public int getClicked() {
-        return clicked;
-    }
-
-    public void setClicked(int clicked) {
-        this.clicked = clicked;
-    }
-
-    public int getUnsubscribed() {
-        return unsubscribed;
-    }
-
-    public void setUnsubscribed(int unsubscribed) {
-        this.unsubscribed = unsubscribed;
+    public void setSuccessRate(double successRate) {
+        this.successRate = successRate;
     }
 }

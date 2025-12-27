@@ -199,27 +199,6 @@ BatchVerifyResult batch = mailbreeze.verification().batch(
 VerificationStats stats = mailbreeze.verification().stats();
 ```
 
-### Automations
-
-```java
-// Enroll contact in automation
-EnrollResult result = mailbreeze.automations().enroll(
-    EnrollParams.builder()
-        .automationId("auto_welcome")
-        .contactId("contact_123")
-        .variable("first_name", "John")
-        .build()
-);
-
-// List enrollments
-PaginatedResponse<Enrollment> enrollments = mailbreeze.automations()
-    .enrollments()
-    .list();
-
-// Cancel enrollment
-mailbreeze.automations().enrollments().cancel("enroll_123");
-```
-
 ### Attachments
 
 ```java

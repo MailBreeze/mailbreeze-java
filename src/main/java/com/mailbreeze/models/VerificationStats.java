@@ -1,7 +1,6 @@
 package com.mailbreeze.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Email verification statistics.
@@ -9,19 +8,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class VerificationStats {
 
-    @JsonProperty("total_verified")
     private int totalVerified;
-
-    private int valid;
-    private int invalid;
-    private int risky;
-    private int unknown;
-
-    @JsonProperty("credits_used")
-    private int creditsUsed;
-
-    @JsonProperty("credits_remaining")
-    private int creditsRemaining;
+    private int totalValid;
+    private int totalInvalid;
+    private int totalUnknown;
+    private int totalVerifications;
+    private double validPercentage;
 
     public int getTotalVerified() {
         return totalVerified;
@@ -31,51 +23,43 @@ public class VerificationStats {
         this.totalVerified = totalVerified;
     }
 
-    public int getValid() {
-        return valid;
+    public int getTotalValid() {
+        return totalValid;
     }
 
-    public void setValid(int valid) {
-        this.valid = valid;
+    public void setTotalValid(int totalValid) {
+        this.totalValid = totalValid;
     }
 
-    public int getInvalid() {
-        return invalid;
+    public int getTotalInvalid() {
+        return totalInvalid;
     }
 
-    public void setInvalid(int invalid) {
-        this.invalid = invalid;
+    public void setTotalInvalid(int totalInvalid) {
+        this.totalInvalid = totalInvalid;
     }
 
-    public int getRisky() {
-        return risky;
+    public int getTotalUnknown() {
+        return totalUnknown;
     }
 
-    public void setRisky(int risky) {
-        this.risky = risky;
+    public void setTotalUnknown(int totalUnknown) {
+        this.totalUnknown = totalUnknown;
     }
 
-    public int getUnknown() {
-        return unknown;
+    public int getTotalVerifications() {
+        return totalVerifications;
     }
 
-    public void setUnknown(int unknown) {
-        this.unknown = unknown;
+    public void setTotalVerifications(int totalVerifications) {
+        this.totalVerifications = totalVerifications;
     }
 
-    public int getCreditsUsed() {
-        return creditsUsed;
+    public double getValidPercentage() {
+        return validPercentage;
     }
 
-    public void setCreditsUsed(int creditsUsed) {
-        this.creditsUsed = creditsUsed;
-    }
-
-    public int getCreditsRemaining() {
-        return creditsRemaining;
-    }
-
-    public void setCreditsRemaining(int creditsRemaining) {
-        this.creditsRemaining = creditsRemaining;
+    public void setValidPercentage(double validPercentage) {
+        this.validPercentage = validPercentage;
     }
 }

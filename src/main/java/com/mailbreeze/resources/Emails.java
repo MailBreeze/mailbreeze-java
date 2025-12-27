@@ -112,7 +112,8 @@ public class Emails extends BaseResource {
      * @return the email statistics
      */
     public EmailStats stats() {
-        return get("/stats", null, EmailStats.class);
+        EmailStatsResponse response = get("/stats", null, EmailStatsResponse.class);
+        return response != null ? response.getStats() : null;
     }
 
     /**

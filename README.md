@@ -21,7 +21,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.mailbreeze:mailbreeze-java:0.1.0")
+    implementation("com.mailbreeze:mailbreeze-java:0.2.5")
 }
 ```
 
@@ -40,7 +40,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.mailbreeze:mailbreeze-java:0.1.0'
+    implementation 'com.mailbreeze:mailbreeze-java:0.2.5'
 }
 ```
 
@@ -60,7 +60,7 @@ Add to your `pom.xml`:
     <dependency>
         <groupId>com.mailbreeze</groupId>
         <artifactId>mailbreeze-java</artifactId>
-        <version>0.1.0</version>
+        <version>0.2.5</version>
     </dependency>
 </dependencies>
 ```
@@ -120,10 +120,16 @@ SendEmailResult result = mailbreeze.emails().send(
 SendEmailResult result = mailbreeze.emails().send(params, "unique-key-123");
 
 // List emails
-PaginatedResponse<Email> emails = mailbreeze.emails().list();
+Emails.EmailsResponse response = mailbreeze.emails().list();
+for (Email email : response.getEmails()) {
+    System.out.println(email.getId());
+}
 
 // Get email by ID
 Email email = mailbreeze.emails().get("email_abc123");
+
+// Cancel a pending email
+CancelEmailResult cancelled = mailbreeze.emails().cancel("email_abc123");
 
 // Get email stats
 EmailStats stats = mailbreeze.emails().stats();
@@ -141,7 +147,10 @@ ContactList list = mailbreeze.lists().create(
 );
 
 // List all lists
-PaginatedResponse<ContactList> lists = mailbreeze.lists().list();
+Lists.ListsResponse response = mailbreeze.lists().list();
+for (ContactList list : response.getData()) {
+    System.out.println(list.getName());
+}
 
 // Update a list
 ContactList updated = mailbreeze.lists().update("list_123",
@@ -168,7 +177,10 @@ Contact contact = mailbreeze.contacts("list_123").create(
 );
 
 // List contacts
-PaginatedResponse<Contact> contacts = mailbreeze.contacts("list_123").list();
+Contacts.ContactsResponse response = mailbreeze.contacts("list_123").list();
+for (Contact contact : response.getContacts()) {
+    System.out.println(contact.getEmail());
+}
 
 // Update a contact
 Contact updated = mailbreeze.contacts("list_123").update("contact_abc",
@@ -189,11 +201,14 @@ VerifyEmailResult result = mailbreeze.verification().verify("test@example.com");
 
 // Batch verification
 BatchVerifyResult batch = mailbreeze.verification().batch(
-    BatchVerifyParams.builder()
-        .email("user1@example.com")
-        .email("user2@example.com")
-        .build()
+    BatchVerifyParams.of(List.of("user1@example.com", "user2@example.com"))
 );
+
+// Get batch verification status
+BatchVerifyResult status = mailbreeze.verification().get(batch.getVerificationId());
+
+// List all verifications
+List<VerificationListItem> verifications = mailbreeze.verification().list();
 
 // Get verification stats
 VerificationStats stats = mailbreeze.verification().stats();
@@ -216,10 +231,7 @@ CreateAttachmentUploadResult upload = mailbreeze.attachments().createUpload(
 
 // Step 3: Confirm upload
 Attachment attachment = mailbreeze.attachments().confirm(
-    ConfirmAttachmentParams.builder()
-        .attachmentId(upload.getAttachmentId())
-        .uploadToken(upload.getUploadToken())
-        .build()
+    ConfirmAttachmentParams.of(upload.getUploadToken())
 );
 ```
 

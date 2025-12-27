@@ -3,10 +3,11 @@ plugins {
     `maven-publish`
     signing
     jacoco
+    id("com.diffplug.spotless") version "6.25.0"
 }
 
 group = "com.mailbreeze"
-version = "0.2.0"
+version = "0.2.5"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -55,6 +56,15 @@ tasks.jacocoTestCoverageVerification {
                 minimum = "0.95".toBigDecimal()
             }
         }
+    }
+}
+
+spotless {
+    java {
+        googleJavaFormat("1.19.2")
+        removeUnusedImports()
+        trimTrailingWhitespace()
+        endWithNewline()
     }
 }
 

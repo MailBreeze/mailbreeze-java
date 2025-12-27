@@ -1,57 +1,46 @@
 package com.mailbreeze.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.time.Instant;
 
-/**
- * Result of creating an attachment upload.
- */
+/** Result of creating an attachment upload. */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CreateAttachmentUploadResult {
 
-    @JsonProperty("attachment_id")
-    private String attachmentId;
+  private String attachmentId;
+  private String uploadUrl;
+  private Instant expiresAt;
 
-    @JsonProperty("upload_url")
-    private String uploadUrl;
+  public String getAttachmentId() {
+    return attachmentId;
+  }
 
-    @JsonProperty("upload_token")
-    private String uploadToken;
+  public void setAttachmentId(String attachmentId) {
+    this.attachmentId = attachmentId;
+  }
 
-    @JsonProperty("expires_at")
-    private Instant expiresAt;
+  public String getUploadUrl() {
+    return uploadUrl;
+  }
 
-    public String getAttachmentId() {
-        return attachmentId;
-    }
+  public void setUploadUrl(String uploadUrl) {
+    this.uploadUrl = uploadUrl;
+  }
 
-    public void setAttachmentId(String attachmentId) {
-        this.attachmentId = attachmentId;
-    }
+  /**
+   * Gets the upload token for confirming the upload. This is the same as the attachment ID.
+   *
+   * @return the upload token (attachment ID)
+   */
+  public String getUploadToken() {
+    return attachmentId;
+  }
 
-    public String getUploadUrl() {
-        return uploadUrl;
-    }
+  public Instant getExpiresAt() {
+    return expiresAt;
+  }
 
-    public void setUploadUrl(String uploadUrl) {
-        this.uploadUrl = uploadUrl;
-    }
-
-    public String getUploadToken() {
-        return uploadToken;
-    }
-
-    public void setUploadToken(String uploadToken) {
-        this.uploadToken = uploadToken;
-    }
-
-    public Instant getExpiresAt() {
-        return expiresAt;
-    }
-
-    public void setExpiresAt(Instant expiresAt) {
-        this.expiresAt = expiresAt;
-    }
+  public void setExpiresAt(Instant expiresAt) {
+    this.expiresAt = expiresAt;
+  }
 }
